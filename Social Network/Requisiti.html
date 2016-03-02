@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<style type="text/css">
+<!--
+body {
+	margin: 0.5cm;
+	/*
+	font-size: 13px;
+	*/
+	}
+p   {
+    margin-top: 0.1em;
+    margin-bottom: 0.5em;
+    }
+b   {
+	font-family: monospace;
+	color: MidnightBlue;
+	background: #f8f8f8;
+	border-radius: 2pt;
+	padding: 1pt;
+/*
+    font-size=85%;
+	border: 1pt dotted silver;
+*/
+	}
+	
+i   {
+	color: Navy;
+	font-family: monospace;
+	}
+	
+h1  {
+	font-family: sans-serif;
+	text-align: center;
+    line-height: 1.1em;
+	}
+	
+h2  {
+    /*float: left;*/
+    margin-top: 0;
+    padding: 5px 10px 5px 0px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    line-height: 0.8em;
+	color: RoyalBlue;
+	font-family: sans-serif;
+	border-top: 1px dotted gray;
+	}
+table {
+	float: right;
+	margin: 20px;
+	border-collapse:collapse;
+	border-bottom: 1px solid Navy;
+	border-top: 1px solid Navy;
+	}
+td, th  {
+	padding: 1px 5px 1px 5px;
+	}
+tr:nth-child(even) {
+    background-color: PowderBlue;
+    margin: 1pt solid PowderBlue;
+}
+-->
+</style>
+  <title>Lab - Social</title>
+  <meta name="revision" content="June 4, 2015">
+  <meta name="author" content="Marco Torchiano">
+</head>
+</head>
+<body style="font-size:10pt;">
+<h1 style="text-align: center;">Social Network</h1>
+Sviluppare un'applicazione per supportare un social network.
+    Tutte le classi si devono trovare nel pacakge <b>social</b>.<br>
+
+<h2>R1 - Sottoscrizione</h2>
+L'interazione con il sistema avviene tramite la classe  <b>Social</b>.
+<p>
+    &Egrave; possibile registrare un nuovo account tramite il metodo <b>addPerson()</b>
+    che accetta come parametri un codice univoco, nome e cognome.<br>
+    Il metodo lancia un'eccezione di <b>PersonExistsException</b> se il codice univoco
+    &egrave; gi&agrave; associato ad un account.<br>
+    Il metodo <b>getPerson()</b> restituice una stringa contenente codice,
+    nome e cognome della persona, separati da spazi. Se il codice passato
+    come parametro non corrisponde a nessun account, il metodo lancia
+    un'eccezione di <b>NoSuchCodeException</b>.
+</p>
+    
+    
+<h2>R2 - Amicizia</h2>
+    Una persona, registrata sul social network, pu&ograve; aggiungere
+    degli amici. L'amicizia &egrave; bi-direzionale: se la persona Tizio
+    &egrave; amico della persona Caio, questo significa che la persona
+    Caio &egrave; amico di Tizio.
+<p>
+    L'amicizia viene stabilita con il metodo <b>addFriendship()</b>
+    che accetta come parametri il codice di entrambe le persone.
+    Il metodo lancia un'eccezione di <i>NoSuchCodeException</i>
+    se almeno uno dei due codici non esiste.
+</p>
+<p>
+    Il metodo <b>listOfFriends()</b> riceve come parametro il codice
+    di una persona e restituisce la collezione dei suoi amici.
+    Viene lanciata una <i>NoSuchCodeException</i> se il codice non esiste.<br>
+    Se la persona non ha amici viene restituita una collezione vuota.
+</p>
+<p>
+    Il metodo <b>friendsOfFriends</b> riceve come parametro il codice di una
+    persona e restituisce la collezione degli amici dei propri amici, ovvero
+    gli amici di secondo livello.
+    Viene lanciata una <i>NoSuchCodeException</i> se il codice non esiste.<br>
+    Se la persona non ha amici di amici viene restituita una collezione vuota.
+    <br>
+    La collezione non deve contenere la persona il cui codice &egrave; stato passato
+    al metodo. ("rimuovi te stesso dall lista")
+</p>
+<p>
+    Il metodo <b>friendsOfFriendsNoRepitition()</b> restituisce la lista dei codici
+    degli amici di secondo livello, come il metodo precedente, ma senza duplicati.<br>
+    Per esempio se <i>A</i> ha come amici <i>B</i> e <i>C</i> ed entrambi hanno come
+    amico <i>D</i>, il metodo deve restituire <i>D</i> solo una volta.
+    Viene lanciata una <i>NoSuchCodeException</i> se il codice non esiste.<br>
+</p>
+    
+<h2>R3 - Gruppi</h2>
+&Egrave; possibile registrare un gruppo tramite il metodo <b>addGroup()</b>.
+    Il nome del gruppo deve consistere in una sola parola.<br>
+<p>
+    Il metodo <b>listOfGroups()</b> restituisce la lista dei nomi
+    di tutti i gruppi registrati o la collezione vuota se non ce
+    ne sono.
+    </p>
+<p>
+    Una persona pu&ograve; essere iscritta ad un gruppo tramite il metodo
+    <b>addPersonToGroup()</b> che riceve come parametri il codice della persona
+    ed il nome del gruppo.<br>
+    Quindi il metodo <b>listOfPeopleInGroup()</b> restituisce la collezione
+    dei codici delle persone iscritte al gruppo dato.
+    </p>
+    
+<h2>R4 - Statistiche</h2>
+Il metodo <b>personWithLargestNumberOfFriends()</b> restituisce il codice
+    della persona che ha il maggior numero di amici (di primo livell).
+    Si supponga che non esistano casi di parit&agrave;.
+<p>
+    Il metodo <b>personWithMostFriendsOfFriends()</b> restituisce il codice
+    della persona con il maggior numero di amici di amici (secondo livello).
+    Si supponga che non esistano casi di parit&agrave;.
+</p>
+<p>
+    Il metodo <b>largestGroup()</b> resituisce il nome del gruppo con il
+    maggior numero di membri. Si supponga che non esistano casi di parit&agrave;.
+</p>
+    
+    
+<h2>R5 - GUI Layout</h2>
+<img src="img/GUI.png" style="float:right;width:35%;">
+    Sviluppare un'interfaccia grafica per l'applicazione.
+    La classe <b>SocialGui</b>, che rappresenta l'interfaccia, fornisce
+    un costruttore che accetta un oggetto <i>Social</i> come parametro.
+    <br>
+    Si utilizzini i componenti forniti come attributi della classe (al fine di rendere
+    l'interfaccia testabile).
+<p>
+Il layout deve essere simili a quello mostrato a lato.
+<p>
+<dl>
+<dt>Suggerimento:<dd> per annidate componenti si usi <i>JPanel</i> come contentitor,
+    ad esempio per inserire diversi componenti nell'area <i>NORTH</i> di un border layout:
+<i><pre>
+setLayout(new BorderLayout());
+
+JPanel upper = new JPanel();
+upper.setLayout(new FlowLayout());
+upper.add( ... );
+
+add(upper,BorderLayout.NORTH);
+</pre></i>
+</dl>
+
+<h2>R6 - Login</h2>
+<img src="img/Error.png" style="float:right;width:25%;">
+    Per effettuare il login, un utente deve inserire il proprio codice univoco
+    nel campo ID e premere il pulsante <i>Login</i>.
+<br>
+    Quando un utente esegue il login, il sistema controlla che il codice sia valido,
+    quindi deve mostrare nome e cognome nell'area corrispondente (indicata come
+    <i>&lt; user name &gt;</i> nell'immagine precedente).    
+<p>
+Se il codice non &egrave; valido deve essere mostrato il messaggio 
+    di errore a fianco.
+<p>
+Dopo un login riuscito, il sistema deve mostrare la lista
+    degli amici nella lista corrispondente.
+<dl>
+<dt>Suggerimento:<dd> si usi <i>setListData(Object[])</i> della classe <i>JList</i> 
+per inserire dei contenuti nella lista.</dl>
+<p>
+Inoltre deve essere possibile fare il login semplicemente premento il tasto
+    enter sulla tastiera dopo ave scritto il codice.
+<p>
+<dl>
+<dt>Suggerimento:<dd> si usi un <i>KeyListener</i> e in particolare il metodo <i>keyReleased()</i>.
+Si confronti il codice del tasto con la costante    <i>KeyEvent.VK_ENTER</i>.
+</dl>
+
+<br>
+</body>
+</html>

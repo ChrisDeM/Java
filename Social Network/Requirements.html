@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<style type="text/css">
+<!--
+body {
+	margin: 0.5cm;
+	/*
+	font-size: 13px;
+	*/
+	}
+p   {
+    margin-top: 0.1em;
+    margin-bottom: 0.5em;
+    }
+b   {
+	font-family: monospace;
+	color: MidnightBlue;
+	background: #f8f8f8;
+	border-radius: 2pt;
+	padding: 1pt;
+/*
+    font-size=85%;
+	border: 1pt dotted silver;
+*/
+	}
+	
+i   {
+	color: Navy;
+	font-family: monospace;
+	}
+	
+h1  {
+	font-family: sans-serif;
+	text-align: center;
+    line-height: 1.1em;
+	}
+	
+h2  {
+    /*float: left;*/
+    margin-top: 0;
+    padding: 5px 10px 5px 0px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    line-height: 0.8em;
+	color: RoyalBlue;
+	font-family: sans-serif;
+	border-top: 1px dotted gray;
+	}
+table {
+	float: right;
+	margin: 20px;
+	border-collapse:collapse;
+	border-bottom: 1px solid Navy;
+	border-top: 1px solid Navy;
+	}
+td, th  {
+	padding: 1px 5px 1px 5px;
+	}
+tr:nth-child(even) {
+    background-color: PowderBlue;
+    margin: 1pt solid PowderBlue;
+}
+-->
+</style>
+  <title>Lab - Social</title>
+  <meta name="revision" content="June 4, 2015">
+  <meta name="author" content="Marco Torchiano">
+</head>
+</head>
+<body style="font-size:10pt;">
+<h1 style="text-align: center;">Social Network</h1>
+Develop an application to support a social network. All classes must be
+in the package "<b>social</b>".<br>
+
+<hr style="width: 100%; height: 2px;">
+<h2>R1 - Subscription</h2>
+The interaction with the system is made using class <b>Social</b>.
+<br>
+You can register new account using method <b>addPerson()</b>
+which receives as parameters a unique code, name and surname.<br>
+The method throws the exception <b>PersonExistsException</b>
+if the code passed is already associated to a subscription.<br>
+The method <b>getPerson()</b> returns a string containing code, name
+and surname of the person, in order, separated by blanks. If the code,
+passed as a parameter, does not match any person, the method throws the
+exception <b>NoSuchCodeException</b>.<br>
+<br>
+
+<h2>R2 - Friends</h2>
+Any person, registered in the social, should have possibility to add
+friends. Friendship is bidirectional: if person A is friend of a person
+B, that means that person B is friend of a person A. Friendship is
+created using method <b>addFriendship()</b> that receives as
+parameters the codes of both. The method throws the exception <b>NoSuchCodeException</b> if one or both
+codes do not exist.<br>
+Method <b>listOfFriends()</b> receives as a parameter code of a person
+and returns the collection of his/her friends. The exception <b>NoSuchCodeException</b> is thrown if the
+code does not exist. If a person has no friends an empty collection is returned.<br>
+The method <b>friendsOfFriends</b> receives as a parameter the code of a
+person and returns the collection of the friends of his/her friends, i.e.
+friends of the second level. The exception <b>NoSuchCodeException</b> is thrown if the
+code do not exist.
+If the list is empty the method returns an empty colletion. The list should not
+contain the person whose code was passed as parameter in this method.
+("remove yourself from the list") <br>
+The method <b>friendsOfFriendsNoRepitition()</b> returns the list of codes
+of friends of the second level (friends of the friends), like the
+previous method, with
+the difference that it should delete duplications. For example, Friend
+A has Friend B and Friend D. Both B and D have Friend C. The method
+friendsOfFriendsNoRepitition() called for A should return C only once.
+If the list is empty the method should return and empty collection. The exception <b>NoSuchCodeException</b> is thrown if the
+code do not exist.<br>
+
+<h2>R3 - Groups</h2>
+It is possible to register a new group using method <b>addGroup()</b>.
+Name of the group should be a single word.<br>
+The method <b>listOfGroups()</b> returns the list of names of all
+registered groups. If there are no groups in the list the method should
+return an empty collection.<br>
+A person can subscribe to a group using method <b>addPersonToGroup()</b>
+that receives as parameters the code of the person and the name of the
+group. <br>
+Method <b>listOfPeopleInGroup()</b> returns
+collection of codes of people subscribed to a given group.<br>
+
+<h2>R4 - Statistics</h2>
+Method <b>personWithLargestNumberOfFriends()</b> returns code of a
+person that has largest amount of friends (first level). Do not consider
+the case of ties. <br>
+Method <b>personWithMostFriendsOfFriends()</b> returns code of a person
+that has largest amount of the friends of friends (second level). Do
+not consider the case of ties. <br>
+Method <b>largestGroup()</b> returns name of the group with largest
+number of members. Do not consider the case of ties.<br>
+Method <b>personInLargestNumberOfGroups()</b> returns code of a person
+that is subscribed to largest number of groups. Do not consider the
+case of ties.<br>
+
+<h2>R5 - GUI Layout</h2>
+<img src="img/GUI.png" style="float:right;width:35%;">
+Develop the GUI for the social network application.
+The class <b>SocialGui</b> that represent the interface provides a constructor
+accepting a <i>Social</i> object as an argument.
+<br>
+Use the graphical components provided as attributes of the class.
+<p>
+The layout of the application must be similar to the one on the right.
+<p>
+<dl>
+<dt>Hint:<dd> you should consider nesting components by using <i>JPanel</i> as container, 
+e.g. if you wish to have several components in the <i>NORTH</i> area of a border layout:
+<i><pre>
+setLayout(new BorderLayout());
+
+JPanel upper = new JPanel();
+upper.setLayout(new FlowLayout());
+upper.add( ... );
+
+add(upper,BorderLayout.NORTH);
+</pre></i>
+</dl>
+
+<h2>R6 - Login</h2>
+<img src="img/Error.png" style="float:right;width:25%;">
+To login, a user must enter its unique code in the ID field and click the "Login" button.
+<br>
+When the user attempts to login, the system must check if the code is valid,
+then it must show the first and last name of the user in the corresponding area
+(indicated as "&lt; user name &gt;" in the mockup above).
+<p>
+If the code is invalid an error message box must be presented to the user:
+<p>
+
+After a positive login, the system must show the list of friends  in
+the corresponding list component.
+
+<dl>
+<dt>Hint:<dd> use the <code>setListData(Object[])</code> method of class <code>JList</code> 
+to populate the list content.</dl>
+<p>
+It must be also possible to login just hitting  <i>enter</i> after writing the code.
+<p>
+<dl>
+<dt>Hint:<dd> use the <i>KeyListener</i> and in particular the <i>keyReleased()</i> method.
+And compare the key code to the constant value <i>KeyEvent.VK_ENTER</i>.
+</dl>
+
+<br>
+</body>
+</html>
